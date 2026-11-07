@@ -1,0 +1,24 @@
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__interior">
+    <a class="marca" routerLink="/">
+      <span class="marca__punto" aria-hidden="true"></span>
+      <span>
+        <strong>People Generator</strong>
+        <small>generador de personajes</small>
+      </span>
+    </a>
+  </div>
+</header>
+
+<main id="contenido" class="contenedor principal">
+  <router-outlet />
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie__interior">
+    <span>© {{ anio }} Leandro Carlino</span>
+    <span>Hecho con Angular</span>
+  </div>
+</footer>

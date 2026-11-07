@@ -1,27 +1,53 @@
-# peopleGenerator
+# People Generator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
+Generador de personajes aleatorios: nombre, apellido, edad, altura, nacionalidad, signo, ocupación y color favorito, con retrato incluido.
 
-## Development server
+**Demo:** https://leandrocarlino.github.io/peopleGenerator/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Reescrito en **Angular 22** con standalone components y signals.
 
-## Code scaffolding
+## Qué cambió
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| | Antes | Ahora |
+|---|---|---|
+| Framework | Angular 14 (sin soporte, no compila en Node 24) | **Angular 22**, standalone + signals |
+| Fotos | 41 PNG de ~1,3 MB | **46 WebP de 0,46 MB** |
+| Retratos | 21 de mujer y 20 de hombre declarados, pero solo existen 20 y 21 | las listas se generan desde `public/img`: imposible pedir una foto inexistente |
+| Datos | “Diego” y “Venezuela” duplicados | listas sin repetidos, tildes normalizadas |
+| Altura | `charAt(0)+'.'+charAt(1)+charAt(2)` sobre un string | centímetros en el modelo y formato al mostrar |
+| Generación | lógica atada al servicio, imposible de testear | función pura `generarPersona(genero, rnd)` inyectable |
+| Historial | no existía | últimas 6 generadas, clicables |
+| Copiar | no existía | copia la ficha, con fallback y mensaje de error |
+| Página de error | “error works!” | 404 propia con título por ruta |
+| Tests | specs por defecto | **8 tests** (rangos, retratos, formato) |
 
-## Build
+## Características
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Tres acciones: **generar mujer**, **generar hombre** y **sorpréndeme**.
+- Ficha con retrato, datos y botón para copiarla como texto.
+- Historial de las últimas seis personas, para volver a una sin perderla.
+- Estado vacío con ilustración en vez de campos en blanco.
+- Responsive: la ficha pasa de dos columnas a una en móvil.
+- Tema claro/oscuro, foco visible y `aria-live` en la ficha.
+- Lighthouse: accesibilidad, buenas prácticas y SEO en 100.
 
-## Running unit tests
+## Datos
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Las listas de nombres, apellidos, nacionalidades, signos, ocupaciones y colores viven en
+`src/app/core/datos.ts`; los retratos en `public/img` (uno por género y número).
+La generación es una función pura (`src/app/core/persona.ts`), así que se puede testear
+con un generador aleatorio inyectado.
 
-## Running end-to-end tests
+## Correr
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+npm start        # http://localhost:4200
+npm test         # 8 tests
+npm run build
+```
 
-## Further help
+## Créditos
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Los retratos son ilustraciones de sus respectivos autores. Este proyecto no recopila datos
+ni tiene fines comerciales.

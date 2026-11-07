@@ -1,0 +1,84 @@
+<header class="portada">
+  <p class="kicker">Character maker</p>
+  <h1>Generador de personas</h1>
+  <p class="lede">
+    Un clic y aparece un personaje con nombre, edad, altura, signo, ocupación y
+    color favorito. Datos y retratos aleatorios, ideal para inspirar una historia.
+  </p>
+</header>
+
+<section class="escenario" aria-live="polite" aria-atomic="true">
+  @if (persona(); as p) {
+    <article class="ficha">
+      <div class="ficha__retrato">
+        <img
+          [src]="p.foto"
+          [alt]="'Retrato de ' + p.nombre + ' ' + p.apellido"
+          width="320"
+          height="320"
+        >
+      </div>
+
+      <div class="ficha__datos">
+        <p class="ficha__genero">{{ p.genero === 'mujer' ? 'Mujer' : 'Hombre' }}</p>
+        <h2>{{ p.nombre }} {{ p.apellido }}</h2>
+
+        <dl>
+          <div><dt>Edad</dt><dd>{{ p.edad }} años</dd></div>
+          <div><dt>Altura</dt><dd>{{ formatearAltura(p.altura) }}</dd></div>
+          <div><dt>Nacionalidad</dt><dd>{{ p.nacionalidad }}</dd></div>
+          <div><dt>Ocupación</dt><dd>{{ p.ocupacion }}</dd></div>
+          <div><dt>Signo</dt><dd>{{ p.signo }}</dd></div>
+          <div><dt>Color favorito</dt><dd>{{ p.color }}</dd></div>
+        </dl>
+
+        <button type="button" class="copiar" (click)="copiar()" [attr.data-estado]="estadoCopia()">
+          @switch (estadoCopia()) {
+            @case ('copiado') { ¡Ficha copiada! }
+            @case ('error') { No se pudo copiar }
+            @default { Copiar ficha }
+          }
+        </button>
+      </div>
+    </article>
+  } @else {
+    <div class="vacio">
+      <img src="img/people1.webp" alt="" width="320" height="320">
+      <p>Todavía no generaste a nadie.</p>
+      <p class="vacio__ayuda">Elegí un género o dejá que la suerte decida.</p>
+    </div>
+  }
+</section>
+
+<div class="acciones">
+  <button type="button" class="boton boton--primario" (click)="generar('mujer')">
+    Generar mujer
+  </button>
+  <button type="button" class="boton boton--primario" (click)="generar('hombre')">
+    Generar hombre
+  </button>
+  <button type="button" class="boton boton--suerte" (click)="generar('sorpresa')">
+    Sorpréndeme ✦
+  </button>
+</div>
+
+@if (historial().length > 1) {
+  <section class="historial" aria-labelledby="historial-titulo">
+    <h2 id="historial-titulo">Últimas generadas</h2>
+    <ul>
+      @for (item of historial(); track item.id) {
+        <li>
+          <button type="button" (click)="recuperar(item)" [attr.aria-label]="'Ver a ' + item.nombre">
+            <img [src]="item.foto" alt="" width="48" height="48">
+            <span>{{ item.nombre }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+<p class="nota">
+  Los retratos son ilustraciones de sus respectivos autores. Este proyecto no recopila
+  datos ni tiene fines comerciales.
+</p>

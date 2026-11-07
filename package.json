@@ -1,5 +1,5 @@
 {
-  "name": "people-creator",
+  "name": "people-gen",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,31 +9,24 @@
     "test": "ng test"
   },
   "private": true,
+  "packageManager": "npm@11.19.0",
   "dependencies": {
-    "@angular/animations": "^14.2.10",
-    "@angular/common": "^14.2.10",
-    "@angular/compiler": "^14.2.10",
-    "@angular/core": "^14.2.10",
-    "@angular/forms": "^14.2.10",
-    "@angular/platform-browser": "^14.2.10",
-    "@angular/platform-browser-dynamic": "^14.2.10",
-    "@angular/router": "^14.2.10",
-    "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.2.9",
-    "@angular/cli": "^14.2.9",
-    "@angular/compiler-cli": "^14.2.10",
-    "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.11.1",
-    "jasmine-core": "~4.0.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.1.0",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.6.2"
+    "@angular/build": "^22.2.6",
+    "@angular/cli": "^22.2.6",
+    "@angular/compiler-cli": "^22.2.0",
+    "jsdom": "^30.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
   }
 }
